@@ -1,4 +1,4 @@
 /[Bb]uild/
 .DS_Store
-
+.cache
 /tree.txt
