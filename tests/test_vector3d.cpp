@@ -51,3 +51,16 @@ TEST_CASE("normalized() preserves direction and yields length 1", VECTOR3DTAG)
 	REQUIRE_THAT(u.length(), WithinRel(1.0, 0.0001));
 }
 
+TEST_CASE("vector addition is commutative, tip to tail either order", VECTOR3DTAG)
+{
+	const Vector3D p{4.0, 1.0, 0.0};
+	const Vector3D q{1.0, 3.0, 0.0};
+
+	const Vector3D sum1 = p + q;
+	const Vector3D sum2 = q + p;
+
+	REQUIRE_THAT(sum1.x, WithinRel(5.0, 0.0001));
+	REQUIRE_THAT(sum1.y, WithinRel(4.0, 0.0001));
+	REQUIRE_THAT(sum1.x, WithinRel(sum2.x, 0.0001));
+	REQUIRE_THAT(sum1.y, WithinRel(sum2.y, 0.0001));
+}

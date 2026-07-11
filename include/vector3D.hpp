@@ -45,8 +45,8 @@ namespace nbody
 		constexpr Vector3D& operator/=(const double s) noexcept
 		{
 			x /= s;
-			y /= y;
-			z /= z;
+			y /= s;
+			z /= s;
 			return *this;
 		}
 
@@ -76,7 +76,7 @@ namespace nbody
 	[[nodiscard]] constexpr Vector3D operator-(Vector3D a, const Vector3D& b) noexcept
 	{
 		a -= b;
-		return b;
+		return a;
 	}
 
 	[[nodiscard]] constexpr Vector3D operator-(Vector3D a) noexcept
