@@ -5,9 +5,10 @@
 
 namespace nbody
 {
-	/*
- * The struct Represents a 3D vector, such as a position, velocity, acceleration etc.
- */
+	/* *********************************************************************
+	 * The struct Represents A fundamental 3D mathematical vector used for 
+	 * kinematics and mechanics. a 3D vector.
+	 * *********************************************************************/
 	struct Vector3D
 	{
 		double x{0.0};
