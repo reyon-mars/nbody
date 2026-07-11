@@ -16,10 +16,13 @@ FetchContent_MakeAvailable(Catch2)
 
 
 add_library(nbody_core INTERFACE)
-target_include_directories(nbody_core INTERFACE include)
+target_include_directories(nbody_core INTERFACE {CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
-add_executable(nbody_tests tests/test_vector3d.cpp)
+add_executable(nbody_tests
+    tests/test_vector3d.cpp
+    tests/test_physics.cpp
+)
 target_link_libraries(nbody_tests PRIVATE
     nbody_core
     Catch2::Catch2WithMain
