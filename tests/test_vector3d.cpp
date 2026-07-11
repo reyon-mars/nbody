@@ -1,10 +1,10 @@
-#include "../include/vector3D.hpp"
+#include "../include/nbody/vector3D.hpp"
 #include "catch2/matchers/catch_matchers.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <cmath>
 
-#define VECTOR3DTAG
+#define VECTOR3DTAG "[Vector3D]"
 
 using Catch::Matchers::WithinAbs;
 using Catch::Matchers::WithinRel;
