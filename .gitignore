@@ -1,4 +1,27 @@
+# ==============================================================================
+# Build & Compilation Artifacts
+# ==============================================================================
+# Ignore the local build directory containing object files and binaries
 /[Bb]uild/
+/build*/
+
+# ==============================================================================
+# Language Server & IDE Configurations
+# ==============================================================================
+# Cache directory for language servers (like clangd used by Vim/VS Code)
+.cache/
+
+# User-specific VS Code settings and workspace states
+.vscode/
+
+# Project-specific Vim session configurations
+.vim/
+
+# ==============================================================================
+# Operating System & Temporary Files
+# ==============================================================================
+# macOS specific hidden file containing folder metadata
 .DS_Store
-.cache
+
+# Temporary directory listings or structural exports
 /tree.txt
