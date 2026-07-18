@@ -86,7 +86,7 @@ namespace nbody
 	 * Kinetic Energy = 1/2(mv^2), 
 	 * Summed over every body. 
 	 */
-	[[nodiscard]] inline double KineticEnergy(const std::vector<Body>& bodies) noexcept
+	[[nodiscard]] inline double kineticEnergy(const std::vector<Body>& bodies) noexcept
 	{
 		double total{0.0};
 		for (const auto& body : bodies)
@@ -100,7 +100,7 @@ namespace nbody
 	 * Potential Energy = -G * m_i * m_j / r, 
 	 * Summed over every UNIQUE pair
 	 */
-	[[nodiscard]] inline double PotentialEnergy(const std::vector<Body>& bodies, double G) noexcept
+	[[nodiscard]] inline double potentialEnergy(const std::vector<Body>& bodies, double G) noexcept
 	{
 		double total{0.0};
 
@@ -113,6 +113,15 @@ namespace nbody
 			}
 		}
 		return total;
+	}
+
+	/*
+	 * Total Energy = K.E + P.E
+	 * Sums up the Total Kinetic Energy with the Total Potential Energy.
+	 */
+	[[nodiscard]] inline double totalEnergy(const std::vector<Body>& bodies, double G) noexcept
+	{
+		return kineticEnergy(bodies) + potentialEnergy(bodies, G);
 	}
 
 } // namespace nbody
