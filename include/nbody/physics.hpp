@@ -116,8 +116,9 @@ namespace nbody
 	}
 
 	/*
-	 * Total Energy = K.E + P.E
-	 * Sums up the Total Kinetic Energy with the Total Potential Energy.
+	 * Total Energy = Total K.E + Total P.E
+	 * Sums up the Total Kinetic Energy with the Total Potential Energy
+	 * and returns the entire energy of the system.
 	 */
 	[[nodiscard]] inline double totalEnergy(const std::vector<Body>& bodies, double G) noexcept
 	{
