@@ -1,6 +1,7 @@
 #include "../include/nbody/body.hpp"
 #include "../include/nbody/physics.hpp"
 #include "../include/nbody/vector3D.hpp"
+#include "catch2/catch_approx.hpp"
 #include "catch2/matchers/catch_matchers.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
@@ -87,4 +88,25 @@ TEST_CASE("Single Euler step against expected values", PHYSICSTAG)
 	REQUIRE_THAT(bodies[1].acceleration.y, WithinRel(-0.064, relative_margin));
 	REQUIRE_THAT(bodies[1].position.x, WithinRel(2.952, relative_margin));
 	REQUIRE_THAT(bodies[1].position.y, WithinRel(3.936, relative_margin));
+}
+
+TEST_CASE("Euler's integrator measurably leaks energy ", PHYSICSTAG)
+{
+	std::vector<Body> bodies = {Body{.position = {0.0, 0.0, 0.0}, .velocity = {0.0, 0.0, 0.0}, .mass = 1000.0},
+								Body{.position = {10.0, 0.0, 0.0}, .velocity = {0.0, 10.0, 0.0}, .mass = 1.0}};
+	const double G = 1.0;
+	const double dt = 0.2;
+
+	const double E0 = nbody::totalEnergy(bodies, G);
+	REQUIRE(E0 == Catch::Approx(-50.0));
+
+	const int steps = 620;
+	for (int i = 0; i < steps; ++i)
+	{
+		nbody::EulerStep(bodies, dt, G);
+	}
+
+	const double Ef = nbody::totalEnergy(bodies, G);
+	const double relativeDrift = std::abs(Ef - E0) / std::abs(E0);
+	CHECK(relativeDrift > 0.02);
 }
