@@ -6,7 +6,6 @@
 
 #define VECTOR3DTAG "[Vector3D]"
 
-using Catch::Matchers::WithinAbs;
 using Catch::Matchers::WithinRel;
 using nbody::Vector3D;
 

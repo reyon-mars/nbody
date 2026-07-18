@@ -9,7 +9,6 @@
 
 #define PHYSICSTAG "[Physics]"
 
-using Catch::Matchers::WithinAbs;
 using Catch::Matchers::WithinRel;
 using nbody::Body;
 using nbody::Vector3D;
