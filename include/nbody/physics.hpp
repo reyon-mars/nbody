@@ -82,4 +82,37 @@ namespace nbody
 		}
 	}
 
+	/*
+	 * Kinetic Energy = 1/2(mv^2), 
+	 * Summed over every body. 
+	 */
+	[[nodiscard]] inline double KineticEnergy(const std::vector<Body>& bodies) noexcept
+	{
+		double total{0.0};
+		for (const auto& body : bodies)
+		{
+			total += 0.5 * body.mass * body.velocity.lengthSquared();
+		}
+		return total;
+	}
+
+	/*
+	 * Potential Energy = -G * m_i * m_j / r, 
+	 * Summed over every UNIQUE pair
+	 */
+	[[nodiscard]] inline double PotentialEnergy(const std::vector<Body>& bodies, double G) noexcept
+	{
+		double total{0.0};
+
+		for (std::size_t i = 0; i < bodies.size(); ++i)
+		{
+			for (std::size_t j = (i + 1); j < bodies.size(); ++j)
+			{
+				const double r = (bodies[i].position - bodies[j].position).length();
+				total += -G * bodies[i].mass * bodies[j].mass / r;
+			}
+		}
+		return total;
+	}
+
 } // namespace nbody
