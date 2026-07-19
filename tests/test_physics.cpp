@@ -109,3 +109,24 @@ TEST_CASE("Euler's integrator measurably leaks energy ", PHYSICSTAG)
 	const double relativeDrift = std::abs(Ef - E0) / std::abs(E0);
 	CHECK(relativeDrift > 0.02);
 }
+
+TEST_CASE("velocityVerletStep reduces to  straight-line motion with only one body", PHYSICSTAG)
+{
+	constexpr double G = 1.0;
+	std::vector<Body> bodies{Body{.position = {1.0, 2.0, 3.0}, .velocity = {4.0, -1.0, 0.5}, .mass = 10.0}};
+	nbody::computeAcceleration(bodies, G);
+
+	// No other body exists so the net force and acceleration must be zero.
+	REQUIRE(bodies[0].acceleration.x == Catch::Approx(0.0));
+	REQUIRE(bodies[0].acceleration.y == Catch::Approx(0.0));
+	REQUIRE(bodies[0].acceleration.y == Catch::Approx(0.0));
+
+	nbody::velocityVerletStep(bodies, 2.0, G);
+
+	CHECK(bodies[0].position.x == Catch::Approx(1.0 + 4.0 * 2.0));
+	CHECK(bodies[0].position.y == Catch::Approx(2.0 + (-1.0) * 2.0));
+	CHECK(bodies[0].position.z == Catch::Approx(3.0 + 0.5 * 2.0));
+	CHECK(bodies[0].velocity.x == Catch::Approx(4.0));
+	CHECK(bodies[0].velocity.y == Catch::Approx(-1.0));
+	CHECK(bodies[0].velocity.z == Catch::Approx(0.5));
+}
