@@ -125,4 +125,37 @@ namespace nbody
 		return kineticEnergy(bodies) + potentialEnergy(bodies, G);
 	}
 
+	/*
+	 * Velocity Verlet
+	 * 
+	 * NOTE:
+	 * bodies[i].acceleration must already hold a(t), i.e the acceleration 
+	 * at the current state, before this is called. That means calling 
+	 * the computeAcceleration( bodies, G ) once, up front before the 
+	 * very first call to this function. 
+	 */
+	inline void velocityVerletStep(std::vector<Body>& bodies, double dt, double G)
+	{
+		std::vector<Vector3D> oldAcceleration(bodies.size());
+		auto oldAccIt = oldAcceleration.begin();
+
+		std::ranges::for_each(bodies,
+							  [&oldAccIt, dt](auto& body)
+							  {
+								  *oldAccIt = body.acceleration;
+								  ++oldAccIt;
+								  body.position += body.velocity * dt + 0.5 * body.acceleration * dt * dt;
+							  });
+
+		computeAcceleration(bodies, G);
+
+		oldAccIt = oldAcceleration.begin();
+		std::ranges::for_each(bodies,
+							  [&oldAccIt, dt](auto& body)
+							  {
+								  body.velocity += 0.5 * (*oldAccIt + body.acceleration) * dt;
+								  ++oldAccIt;
+							  });
+	}
+
 } // namespace nbody
