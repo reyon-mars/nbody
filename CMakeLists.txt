@@ -14,6 +14,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
+option(BUILD_BENCHMARKS "Build the project benchmarks" ON)
+
+if(BUILD_BENCHMARKS)
+    find_package(Threads REQUIRED)
+
+    FetchContent_Declare(
+        googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG v1.8.3
+    )
+    set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+    set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googlebenchmark)
+
+    add_subdirectory(benchmarks)
+endif()
 
 add_library(nbody_core INTERFACE)
 target_include_directories(nbody_core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
