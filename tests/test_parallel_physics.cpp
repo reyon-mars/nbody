@@ -39,6 +39,7 @@ TEST_CASE("parallel acceleration computation is bit-for-bit identical to serial"
 
 	for (std::size_t threads : {std::size_t{1}, std::size_t{2}, std::size_t{4}, std::size_t{8}})
 	{
+		UNSCOPED_INFO("Testing thread count: " << threads);
 		auto parallelBodies = baseline;
 		nbody::computeAccelerationParallel(parallelBodies, G, threads);
 
