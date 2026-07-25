@@ -10,6 +10,12 @@
 
 namespace nbody
 {
+	/*
+	 * Computes net Gravitational accelerations for all bodies in parallel
+	 * Partitions the body array into contiguous chunks across worker threads
+	 * using a static 1D domain decomposition. Execution is synchronised via
+	 * std::thread::join() before returning.
+	 */
 	inline void computeAccelerationParallel(std::vector<Body>& bodies, double G, std::size_t numThreads)
 	{
 		const std::size_t n = bodies.size();
