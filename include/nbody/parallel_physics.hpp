@@ -37,10 +37,10 @@ namespace nbody
 						bodies[i].acceleration = netForce(bodies, i, G) / bodies[i].mass;
 					}
 				});
-			for (auto& worker : workers)
-			{
-				worker.join();
-			}
+		}
+		for (auto& worker : workers)
+		{
+			worker.join();
 		}
 	}
 } // namespace nbody
