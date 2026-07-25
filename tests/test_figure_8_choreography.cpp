@@ -26,7 +26,7 @@ namespace
 
 	constexpr double kG{1.0};
 	constexpr double kDt{0.0001};
-	constexpr int kStepsPerPeriod = 63259; // T ~= 6.3259, measured empirically
+	constexpr int kStepsPerPeriod = 63259;
 } // namespace
 
 TEST_CASE("figure-eight orbit conserves energy to within 0.01% over one period", FIG8TAG)
