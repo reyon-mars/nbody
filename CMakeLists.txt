@@ -23,6 +23,7 @@ add_executable(nbody_tests
     tests/test_vector3d.cpp
     tests/test_physics.cpp
     tests/test_figure_8_choreography.cpp
+    tests/test_parallel_physics.cpp
 )
 target_link_libraries(nbody_tests PRIVATE
     nbody_core
