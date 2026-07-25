@@ -7,8 +7,7 @@ add_executable(nbody_tests
 
 target_link_libraries(nbody_tests
     nbody_core
-    Catch2::Catch2WithMain
-)
+    Catch2::Catch2WithMain)
 
 if(MSVC)
     target_compile_options(nbody_tests PRIVATE /W4)
