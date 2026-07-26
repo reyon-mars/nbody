@@ -1,8 +1,8 @@
 #pragma once
 
-#include "nbody/body.hpp"
-#include "nbody/physics.hpp"
-#include "nbody/vector3D.hpp"
+#include "nbody/core/vector3D.hpp"
+#include "nbody/physics/body.hpp"
+#include "nbody/physics/physics.hpp"
 #include <algorithm>
 #include <cstddef>
 #include <thread>

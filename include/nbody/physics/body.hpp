@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./vector3D.hpp"
+#include "nbody/core/vector3D.hpp"
 
 namespace nbody
 {

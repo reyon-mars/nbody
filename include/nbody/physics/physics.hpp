@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./body.hpp"
-#include "./vector3D.hpp"
+#include "nbody/core/vector3D.hpp"
+#include "nbody/physics/body.hpp"
 #include <cstddef>
 #include <vector>
 
