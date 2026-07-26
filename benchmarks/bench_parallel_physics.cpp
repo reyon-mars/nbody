@@ -1,6 +1,6 @@
-#include "nbody/body.hpp"
-#include "nbody/parallel_physics.hpp"
+#include "nbody/physics/parallel_physics.hpp"
 #include <benchmark/benchmark.h>
+#include <cstddef>
 #include <random>
 #include <vector>
 
@@ -37,10 +37,10 @@ static void BM_ComputeAcceleration_Parallel(benchmark::State& state)
 		benchmark::DoNotOptimize(bodies.data());
 		benchmark::ClobberMemory();
 	}
-	state.SetComplexityN(n * n);
-	state.SetItemsProcessed(state.iterations() * n);
+	state.SetComplexityN(static_cast<int64_t>(n * n));
+	state.SetItemsProcessed(static_cast<int64_t>(static_cast<std::size_t>(state.iterations()) * n));
 }
 
-BENCHMARK(BM_ComputeAcceleration_Parallel)->ArgsProduct({{512, 2048, 8192}, {1, 2, 4, 8, 12, 16}});
+BENCHMARK(BM_ComputeAcceleration_Parallel)->UseRealTime()->ArgsProduct({{512, 2048, 8192}, {1, 2, 4, 8, 12, 16}});
 
 BENCHMARK_MAIN();

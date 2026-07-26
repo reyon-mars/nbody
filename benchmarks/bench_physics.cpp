@@ -1,7 +1,8 @@
-#include "nbody/body.hpp"
-#include "nbody/physics.hpp"
+#include "nbody/physics/body.hpp"
+#include "nbody/physics/physics.hpp"
 #include <benchmark/benchmark.h>
 #include <cstddef>
+#include <cstdint>
 #include <random>
 #include <vector>
 
@@ -37,8 +38,8 @@ static void BM_ComputeAcceleration_Serial(benchmark::State& state)
 		benchmark::DoNotOptimize(bodies.data());
 		benchmark::ClobberMemory();
 	}
-	state.SetComplexityN(n * n);
-	state.SetItemsProcessed(state.iterations() * n);
+	state.SetComplexityN(static_cast<int64_t>(n * n));
+	state.SetItemsProcessed(static_cast<int64_t>(static_cast<std::size_t>(state.iterations()) * n));
 }
 
 BENCHMARK(BM_ComputeAcceleration_Serial)->RangeMultiplier(4)->Range(64, 4096)->Complexity();
