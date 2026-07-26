@@ -1,6 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
-#include "nbody/body.hpp"
-#include "nbody/parallel_physics.hpp"
+#include "nbody/physics/body.hpp"
+#include "nbody/physics/parallel_physics.hpp"
 #include <random>
 #include <vector>
 

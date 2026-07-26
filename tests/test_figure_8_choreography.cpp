@@ -1,7 +1,7 @@
 #include "catch2/catch_test_macros.hpp"
-#include "nbody/body.hpp"
-#include "nbody/physics.hpp"
-#include "nbody/vector3D.hpp"
+#include "nbody/core/vector3D.hpp"
+#include "nbody/physics/body.hpp"
+#include "nbody/physics/physics.hpp"
 #include <cmath>
 #include <cstddef>
 #include <vector>
