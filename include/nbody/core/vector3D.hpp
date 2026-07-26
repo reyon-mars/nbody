@@ -68,16 +68,14 @@ namespace nbody
 		}
 	};
 
-	[[nodiscard]] constexpr Vector3D operator+(Vector3D a, const Vector3D& b) noexcept
+	[[nodiscard]] constexpr Vector3D operator+(const Vector3D& a, const Vector3D& b) noexcept
 	{
-		a += b;
-		return a;
+		return Vector3D{(a.x + b.x), (a.y + b.y), (a.z + b.z)};
 	}
 
-	[[nodiscard]] constexpr Vector3D operator-(Vector3D a, const Vector3D& b) noexcept
+	[[nodiscard]] constexpr Vector3D operator-(const Vector3D& a, const Vector3D& b) noexcept
 	{
-		a -= b;
-		return a;
+		return Vector3D{(a.x - b.x), (a.y - b.y), (a.z - b.z)};
 	}
 
 	[[nodiscard]] constexpr Vector3D operator-(Vector3D a) noexcept
@@ -85,26 +83,23 @@ namespace nbody
 		return Vector3D{-a.x, -a.y, -a.z};
 	}
 
-	[[nodiscard]] constexpr Vector3D operator*(Vector3D a, double s) noexcept
+	[[nodiscard]] constexpr Vector3D operator*(const Vector3D& a, double s) noexcept
 	{
-		a *= s;
-		return a;
+		return Vector3D{(a.x * s), (a.y * s), (a.z * s)};
 	}
 
-	[[nodiscard]] constexpr Vector3D operator*(double s, Vector3D a) noexcept
+	[[nodiscard]] constexpr Vector3D operator*(double s, const Vector3D& a) noexcept
 	{
-		a *= s;
-		return a;
+		return Vector3D{(a.x * s), (a.y * s), (a.z * s)};
 	}
 
-	[[nodiscard]] constexpr Vector3D operator/(Vector3D a, double s) noexcept
+	[[nodiscard]] constexpr Vector3D operator/(const Vector3D& a, double s) noexcept
 	{
-		a /= s;
-		return a;
+		return Vector3D{(a.x / s), (a.y / s), (a.z / s)};
 	}
 
 	inline std::ostream& operator<<(std::ostream& os, const Vector3D& v)
 	{
-		return os << "(" << v.x << ", " << v.y << ", " << v.z << ", " << ")";
+		return os << "(" << v.x << ", " << v.y << ", " << v.z << ")";
 	}
 } // namespace nbody
