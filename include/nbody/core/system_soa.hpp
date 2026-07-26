@@ -79,4 +79,6 @@ namespace nbody
 			mass.reserve(n);
 		}
 	};
+
+	inline constexpr double kSofteningSquared = 1e-9 * 1e-9;
 } // namespace nbody

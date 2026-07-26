@@ -2,6 +2,7 @@
 
 #include "nbody/core/vector3D.hpp"
 #include "nbody/physics/body.hpp"
+#include <algorithm>
 #include <cstddef>
 #include <vector>
 
