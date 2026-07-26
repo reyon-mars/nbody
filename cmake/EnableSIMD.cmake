@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------
+# cmake/EnableSIMD.cmake
+# Detects and enables SIMD vector extensions (AVX2, FMA, NEON)
+# ---------------------------------------------------------------------
+include_guard(GLOBAL)
+
+include(CheckCXXCompilerFlag)
+
+message(STATUS "Checking SIMD Vector Capabilities...")
+
+option(ENABLE_NATIVE_TUNING "Optimize for host CPU (-march=native)" OFF)
+
+if(ENABLE_NATIVE_TUNING AND NOT MSVC)
+    check_cxx_compiler_flag("-march=native" HAS_MARCH_NATIVE)
+    if(HAS_MARCH_NATIVE)
+        add_compile_options(-march=native)
+        message(STATUS "SIMD: Enabled -march=native optimizations")
+    endif()
+else()
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64|ARM64|armv7")
+        if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64|ARM64")
+            add_compile_definitions(NBODY_HAS_NEON)
+            message(STATUS "SIMD: ARM64 NEON Enabled")
+        else()
+            check_cxx_compiler_flag("-mfpu=neon" HAS_NEON_FLAG)
+            if(HAS_NEON_FLAG)
+                add_compile_options(-mfpu=neon)
+                add_compile_definitions(NBODY_HAS_NEON)
+                message(STATUS "SIMD: ARM32 NEON Enabled (-mfpu=neon)")
+            endif()
+        endif()
+
+    else()
+        if(MSVC)
+            check_cxx_compiler_flag("/arch:AVX2" HAS_AVX2)
+            if(HAS_AVX2)
+                add_compile_options(/arch:AVX2)
+                add_compile_definitions(NBODY_HAS_AVX2)
+                message(STATUS "SIMD: MSVC AVX2 Enabled")
+            endif()
+        else()
+            check_cxx_compiler_flag("-mavx2" HAS_AVX2)
+            check_cxx_compiler_flag("-mfma" HAS_FMA)
+
+            if(HAS_AVX2)
+                add_compile_options(-mavx2)
+                add_compile_definitions(NBODY_HAS_AVX2)
+                message(STATUS "SIMD: AVX2 Enabled (-mavx2)")
+            endif()
+
+            if(HAS_FMA)
+                add_compile_options(-mfma)
+                add_compile_definitions(NBODY_HAS_FMA)
+                message(STATUS "SIMD: FMA3 Enabled (-mfma)")
+            endif()
+        endif()
+    endif()
+endif()

@@ -2,13 +2,24 @@
 # CMAKE (ROOT)
 # ---------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.20)
-
 project(nbody LANGUAGES CXX)
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(CompilerFlags)
+include(EnableSIMD)
+
 include(FetchContent)
+
+# *********************************************************************
+# BUILD Options
+# *********************************************************************
+option(BUILD_TESTING "Build the project tests" ON)
+option(BUILD_BENCHMARKS "Build the project benchmarks" ON)
+
 
 # *********************************************************************
 # External Dependencies
@@ -17,17 +28,15 @@ include(FetchContent)
 # -> Google Benchmark
 # *********************************************************************
 
-option(BUILD_TESTING "Build the project tests" ON)
 if(BUILD_TESTING)
     FetchContent_Declare(
         Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG v3.4.0
+        GIT_TAG v3.5.2
     )
     FetchContent_MakeAvailable(Catch2)
 endif()
 
-option(BUILD_BENCHMARKS "Build the project benchmarks" ON)
 if(BUILD_BENCHMARKS)
     find_package(Threads REQUIRED)
 

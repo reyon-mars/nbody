@@ -1,3 +1,6 @@
+# ---------------------------------------------------------------------
+# CMAKE (Benchmarks)
+# ---------------------------------------------------------------------
 add_executable(nbody_benchmarks
     bench_physics.cpp
     bench_parallel_physics.cpp
@@ -6,6 +9,7 @@ add_executable(nbody_benchmarks
 target_link_libraries(nbody_benchmarks
     PRIVATE
     nbody_core
+    nbody_compiler_flags
     benchmark::benchmark
     Threads::Threads
 )
