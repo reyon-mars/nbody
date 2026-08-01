@@ -31,7 +31,7 @@ namespace nbody::simd::avx2
 			__m256d fz = _mm256_setzero_pd();
 
 			std::size_t j{0};
-			for (; (j + 4) < n; j += 4)
+			for (; (j + 4) <= n; j += 4)
 			{
 				const __m256d xj = _mm256_loadu_pd(px + j);
 				const __m256d yj = _mm256_loadu_pd(py + j);
@@ -70,9 +70,9 @@ namespace nbody::simd::avx2
 				const double dx = px[i] - px[j];
 				const double dy = py[i] - py[j];
 				const double dz = pz[i] - pz[j];
-				const double distSquared = (dx * dx) + (dy * dy) + (dz * dz) * kSofteningSquared;
+				const double distSquared = (dx * dx) + (dy * dy) + (dz * dz) + kSofteningSquared;
 				const double dist = std::sqrt(distSquared);
-				const double invDistCubed = distSquared * dist;
+				const double invDistCubed = 1.0 / (distSquared * dist);
 				const double acceleration = -G * pm[j] * invDistCubed;
 				sumX += acceleration * dx;
 				sumY += acceleration * dy;
