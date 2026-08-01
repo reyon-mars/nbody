@@ -1,7 +1,6 @@
 #pragma once
 #include "nbody/core/vector3D.hpp"
 #include "nbody/physics/body.hpp"
-#include <cmath>
 #include <cstddef>
 #include <vector>
 
