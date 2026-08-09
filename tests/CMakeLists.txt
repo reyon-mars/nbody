@@ -3,6 +3,7 @@ add_executable(nbody_tests
     test_parallel_physics.cpp
     test_physics.cpp
     test_vector3D.cpp
+    test_soa.cpp
 )
 
 target_link_libraries(nbody_tests

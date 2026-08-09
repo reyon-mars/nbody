@@ -19,6 +19,7 @@ TEST_CASE("BodySystemSoA round-trips every field from the AoS representation exa
 	const BodySystemSoA soa{bodies};
 
 	REQUIRE(bodies.size() == soa.size());
+
 	std::size_t n = bodies.size();
 	for (std::size_t i = 0; i < n; ++i)
 	{
