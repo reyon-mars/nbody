@@ -7,7 +7,7 @@
 #include <random>
 #include <vector>
 
-#define AUTOVEC_TAG "[AUTOVEC]"
+#define AUTOVEC_TAG "[AutoVec]"
 
 using nbody::Body;
 
