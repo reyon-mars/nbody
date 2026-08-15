@@ -4,6 +4,8 @@ add_executable(nbody_tests
     test_physics.cpp
     test_vector3D.cpp
     test_soa.cpp
+    test_dispatch.cpp
+    test_kernel_auto_vec.cpp
 )
 
 target_link_libraries(nbody_tests
